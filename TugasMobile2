@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(Myapp());
+
+class Myapp extends StatefulWidget {
+  _MyappState createState() => _MyappState();
+}
+
+class _MyappState extends State<Myapp> {
+  //deklarasi variabel
+  final txtkodeelektronik = TextEditingController();
+  final txtnamaelektronik = TextEditingController();
+  final txtjeniselektronik = TextEditingController();
+  List<Widget> data = [];
+
+  onTambah() {
+    setState(() {
+      data.add(ListTile(
+        leading: Icon(Icons.circle),
+        title: Text(txtkodeelektronik.text),
+        subtitle: Text(txtnamaelektronik.text),
+        trailing: Text(txtjeniselektronik.text),
+        
+      ));
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: new Scaffold(
+            appBar: new AppBar(title: Text("TOKO ELEKTRONIK")),
+            body: new ListView(
+              children: <Widget>[
+                new Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      TextField(
+                        controller: txtkodeelektronik,
+                        decoration: InputDecoration(hintText: 'Kode Elektronik'),
+                      ),
+                      TextField(
+                        controller: txtnamaelektronik,
+                        decoration: InputDecoration(hintText: 'Nama Elektronik'),
+                      ),
+                      TextField(
+                        controller: txtjeniselektronik,
+                        decoration: InputDecoration(hintText: 'Jenis Elektronik'),
+                      ),
+                      RaisedButton(child: Text("ADD"), onPressed: onTambah),
+                    ],
+                  ),
+                ),
+                new Column(
+                  // Isi List View
+                  children: data,
+                )
+              ],
+            )));
+  }
+}
